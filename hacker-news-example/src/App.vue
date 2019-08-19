@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <input type="text" name="search_bar" id="#search_bar" :placeholder="hint" v-model="keyword" >
+    <button @click="search">search</button>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import apiUtility from "./helper/apiUtility";
+import { msgType } from './helper/enum';
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data: () => {
+    return {
+      hint:"search...",
+      keyword: "",
+      news: []
+    };
+  },
+  methods: {
+    async search() {
+      if (this.keyword != "") {
+        try {
+          this.news = await apiUtility.getNews(this.keyword);
+        } catch (error) {
+          this.hint = error.message;
+        }
+      }
+      else {
+        this.hint = msgType.emptyKeyword;
+      }
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
