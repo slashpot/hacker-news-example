@@ -1,9 +1,11 @@
 <template>
   <div>
-    <input type="text" name="search_bar" id="#search_bar" :placeholder="hint" v-model="keyword" >
+    <input type="text" name="search_bar" id="#search_bar" :placeholder="hint" v-model="keyword" @keydown.enter="search" >
     <button @click="search">search</button>
     <ul>
-      <li v-for="(item,index) in news" v-bind:key="index">{{item}}</li>
+      <li v-for="(item,index) in news" v-bind:key="index">
+        <a :href="item.url">{{item.title}}</a>
+      </li>
     </ul>
   </div>
 </template>
