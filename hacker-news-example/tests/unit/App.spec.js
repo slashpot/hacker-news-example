@@ -1,6 +1,11 @@
+import { createLocalVue, mount } from '@vue/test-utils';
+import App from '../../src/App.vue'
+
 describe('given App component', () => {
     it('should show "search..." in text placeholder at beginning', () => {
-        
+        const wrapper = mount(App);
+        console.log('wrapper.vm.$data: ', wrapper.vm.$data);
+        expect(wrapper.vm.$data.hint).toBe("search...");
     });
 
     it('should show "please type keyword" in text placeholder when searching with empty keyword', () => {
