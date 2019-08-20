@@ -1,5 +1,6 @@
 import { mockGetNewsData } from "../../src/helper/testData";
 import apiUtility from "../../src/helper/apiUtility";
+import { msgType } from "../../src/helper/enum";
 
 
 describe('given searching news with keyword react', () => {
@@ -15,7 +16,8 @@ describe('given searching news with keyword react', () => {
         ])
     });
 
-    it('should throw exception with apiError message when request failed', () => {
-        
+    it('should throw exception with apiError message when request failed', async () => {
+        global.fetch = jest.fn(()=>Promise.reject());
+        expect(apiUtility.getNews("react")).rejects.toEqual(new Error(msgType.apiError));
     });
 })
