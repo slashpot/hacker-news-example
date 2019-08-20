@@ -4,16 +4,13 @@ import { msgType } from '../../src/helper/enum';
 
 describe('given App component', () => {
     it('should show "search..." in text placeholder at beginning', () => {
-        const wrapper = mount(App);
-
-        expect(wrapper.vm.$data.hint).toBe('search...');
-        expect(wrapper.find('#search_bar').attributes('placeholder')).toBe("search...");
+        // Lucy try!
     });
 
     it('should show "please type keyword" in text placeholder when searching with empty keyword', async () => {
         const wrapper = mount(App);
         await wrapper.vm.search();
-        
+
         expect(wrapper.vm.$data.hint).toBe(msgType.emptyKeyword);
         expect(wrapper.find('#search_bar').attributes('placeholder')).toBe(msgType.emptyKeyword);
     });
