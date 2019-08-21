@@ -4,7 +4,8 @@ import { msgType } from '../../src/helper/enum';
 
 describe('given App component', () => {
     it('should show "search..." in text placeholder at beginning', () => {
-        // Lucy try!
+        const wrapper = mount(App);
+       expect(wrapper.find('#search_bar').attributes('placeholder')).toBe('search...');
     });
 
     it('should show "please type keyword" in text placeholder when searching with empty keyword', async () => {
